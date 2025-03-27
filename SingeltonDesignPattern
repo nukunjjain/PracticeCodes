@@ -1,0 +1,145 @@
+package testPackage;
+
+
+class Nukunj{
+	private static Nukunj nukunj;
+	 private Nukunj() {
+		 
+	 }
+//	 //Case 2: Problem 
+//	 public  static Nukunj getNukunjInstanceMethod() {
+//		 if(nukunj==null) {
+//			 System.out.println("MyThread  is running  before:"+Thread.currentThread().getName());
+//			 nukunj = new Nukunj();
+////			 try {
+////				Thread.sleep(1000);
+////			} catch (InterruptedException e) {
+////				// TODO Auto-generated catch block
+////				e.printStackTrace();
+////			}
+//		 }
+//		 System.out.println("MyThread  is running after:"+Thread.currentThread().getName());
+//		 return nukunj;
+//	 }
+	 
+	 
+	//Case 3: Solution
+		 public synchronized  static Nukunj getNukunjInstanceMethod() {
+			 if(nukunj==null) {
+				 System.out.println("MyThread  is running  before:"+Thread.currentThread().getName());
+				 nukunj = new Nukunj();
+//				 try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+			 }
+			 System.out.println("MyThread  is running after:"+Thread.currentThread().getName());
+			 return nukunj;
+		 }
+}
+
+class Mythread1 extends Thread{
+	
+	public static Nukunj n1;
+	
+	@Override
+	public void run() {
+		System.out.println("MyThread 1 is running :"+Thread.currentThread().getName());
+	n1=	Nukunj.getNukunjInstanceMethod();	
+	}
+	
+}
+
+class Mythread2 extends Thread{
+	
+	public static Nukunj n2;
+	
+	@Override
+	public void run() {
+		System.out.println("MyThread 2 is running :"+Thread.currentThread().getName());
+	n2=	Nukunj.getNukunjInstanceMethod();	
+	}
+	
+}
+
+public class SingletonDesignPatternTest {
+	
+	
+	public static void main(String[] args) {
+		
+		//Case 1
+		
+		
+//	Nukunj n1=	Nukunj.getNukunjInstanceMethod();
+//	Nukunj n2=   Nukunj.getNukunjInstanceMethod();
+//	if(n1.equals(n2)) {
+//		System.out.println("Singelton Design PAttern");
+//	}else {
+//		System.out.println("Not Singelton Design PAttern");
+//	}
+	
+	//Case 2 : MultiThreadingCase
+		
+		
+	Mythread1 t1 = new Mythread1();
+	Mythread2 t2 = new Mythread2();
+	t1.start();
+	t2.start();
+	try {
+		Thread.sleep(8000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	if(Mythread1.n1.equals(Mythread2.n2)) {
+		System.out.println("Singelton Design PAttern");
+	}else {
+		System.out.println("Not Singelton Design PAttern");
+	}
+	
+		
+	}
+
+}
+
+//So steps for singleton design pattern for case 1:
+	
+	
+//	1.first of fall we need to stop constructor call so for this we make constructor of class Nukunj as private.
+//	2.As constructor is private so get the object of nukunj class we make a static method as getNukunjInstanceMethod() which will check
+//	   if (nukunj==null) so create a nukunj object and set into the static variable named as nukunj so this is the first time when someone call the method getNukunjInstanceMethod() from the main method.
+//	 3. If second time someone called the method getNukunjInstanceMethod() then nukunj object is already present in the static varianle hence it return the same instance. So every time same object is returned.
+
+
+
+
+//Case 2:
+//	
+//	Here I made a 2 thread class which is Mythread1 and Mythread2 the intention behind is that i want to call getNukunjInstanceMethod() method by 2 threads so lets say thread 1 gets a chance first  and it will pass thye null condition
+//	at the same time thread2 also gets the chance and also pass the condition now  t1 creates the object and returns it and t2 also creates the object and returns it as both returns the new object it will breach the  condition.
+
+//        OUTPUT :
+//        	MyThread 2 is running :Thread-1
+//        	MyThread 1 is running :Thread-0
+//        	MyThread  is running  before:Thread-0
+//        	MyThread  is running after:Thread-0
+//        	MyThread  is running  before:Thread-1
+//        	MyThread  is running after:Thread-1
+//        	Not Singelton Design PAttern
+
+
+//Case 3:
+//	
+//	So to solve this we made a method as synchronized so 1 thread gets a chance and it will resolve the problem.
+
+
+//OUTPUT :
+//	
+//	MyThread 2 is running :Thread-1
+//	MyThread 1 is running :Thread-0
+//	MyThread  is running  before:Thread-0
+//	MyThread  is running after:Thread-0
+//	MyThread  is running after:Thread-1
+//	Singelton Design PAttern
