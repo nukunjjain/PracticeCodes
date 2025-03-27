@@ -1,0 +1,32 @@
+package testPackage;
+
+public class SecondLargest {
+	
+	public static void main(String[] args) {
+		int arr[] = new int[] {10,50,30,40,40,70
+	};
+		
+		
+		int largest=0;	
+		
+		int secondLargest =-1;
+		
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i]>largest) {
+				largest = arr[i];
+			}
+		}
+		
+		
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i]>secondLargest && arr[i]!=largest) {
+				secondLargest=arr[i];
+			}
+		}
+		System.out.println("Second LARGEST nUMBER IS :"+secondLargest);
+
+    }
+	
+	
+	
+}
