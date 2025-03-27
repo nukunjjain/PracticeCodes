@@ -1,0 +1,34 @@
+package testPackage;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class SortCharactersOnTheBasisOfDescendingFrequency {
+	
+	public static void main(String[] args) {
+	
+		String s="tree";
+		StringBuffer bf = new StringBuffer();
+		Character [] arr = new Character[s.length()];
+		 Map<Character, Long> collect = s.chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+		.entrySet().stream().sorted((a,b)->(b.getValue().compareTo(a.getValue()))).collect(Collectors.toMap(e->e.getKey(),e->e.getValue(),(e1,e2)->(e1),LinkedHashMap::new));
+		 
+		 for(Map.Entry m:collect.entrySet()) {
+			for(Long i= (Long)m.getValue();i>0;i--) {
+				bf.append(m.getKey());
+				
+			}
+		 }
+		 
+		 System.out.println(bf);
+		 
+		 
+		 String s2 ="Teea";
+		char [] ch = s2.toCharArray();
+		LinkedHashMap<Character, Long> collect2 = s2.chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(),Collectors.counting())).entrySet().stream().sorted((a,b)->(b.getValue().compareTo(a.getValue()))).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+		System.out.println(collect2);
+	}
+
+}
