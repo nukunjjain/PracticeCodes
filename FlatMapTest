@@ -1,0 +1,86 @@
+package testPackage;
+
+//	int x= 4;
+
+//list0.stream().map(x->x);
+//list.stream().map(x->x);
+//	list.stream().flatMap(x->x.stream());
+//	
+//	List<Integer>integerList =list.stream().flatMap(n->n.stream()).collect(Collectors.toList());
+//	System.out.println(integerList);
+//	
+
+//stringList.stream().flatMap(s->(List.of(s.toCharArray())).stream()).collect(Collectors.toList());
+
+//	
+//	
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+	public class Solution {
+
+		public static int f(int index,ArrayList<Integer> nums){
+			int maxi=0;
+			if(index<0){
+				return 0;
+				int arr[] = new int[] {1,2,3,4,5};
+				
+				char arr1[] = new char[] {'n','u','k'};
+				List<Integer> asList = Arrays.asList(arr);
+			}
+				if(index-2<0){
+				 return	nums.get(index)
+				}
+				for(int i=index-2;i>=0;i--){
+				int sum =	f(i)+nums[index];
+				maxi = Math.max(sum,maxi);
+				}
+
+			return Math.max(f((index-1),nums),maxi)
+			}
+	List<List<Integer>> ls = List.of()
+
+			public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+			   int index = nums.length-1;
+			 return  f(index,nums);
+		}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	String input = "programming";
+	input.chars()  // Convert string to IntStream
+    .mapToObj(c -> (char) c).filter(c->"aeiouz".contains(c)).collect(null)
+	Map<Character, Long> characterCount = input.chars()  // Convert string to IntStream
+            .mapToObj(c -> (char) c)  // Convert each int (char) to a Character
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));  // Group by character and count occurrences
+
+	int arr[] = new int[] {1,2,3,4,5};
+	
+	char arr1[] = new char[] {'n','u','k'};
+	
+	Arrays.asLis
+	
+//	Arrays.stream(arr1);
+	
+	
+	
+
+	
+	
+	}
+
+}
