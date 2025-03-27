@@ -1,0 +1,107 @@
+package testPackage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class TwoDArrayPractice {
+	
+	 
+	static void h(Integer...i) {System.out.println("h");}
+	
+//	 public static int lastRemaining(int n){
+//	        List<Integer> array1 = new ArrayList<Integer>();
+//
+//	        for(int i =1;i<=n;i++){
+//	            array1.add(i);
+//	        }
+//
+//	        int left =0;
+//	        int right = n-1;
+//
+//	        while(n>1){
+//	          array1.remove(left);
+//
+//	          if(left<= right){
+//	            array1.remove(right-1);
+//	          }
+//	        }
+//	        return array1.get(0);
+//	    }
+
+	 
+	 public static int removeAlternately(int n) {
+		 
+		 List<Integer> array = new ArrayList<Integer>();
+		  int left = 0;
+	        //1,2,3,4,5,6,7,8,9
+
+	        for(int i =1;i<=n;i++){
+	            array.add(i);
+	        }
+	        int right = array.size();
+	        // Initial left and right pointers
+	      
+	        
+	        // Keep removing elements alternately until only one element remains
+	        while (array.size() > 1) {
+	            // Remove element from left
+	            array.remove(left);
+	            right = array.size() - 1;
+	            // After removing from the left, the right index shifts left by one
+	            if (left <= right) {
+	                // Remove element from right
+	                array.remove(right);
+	            }
+	        }
+	        
+	        // Return the last remaining element
+	        return array.get(0);
+	    }
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+		Integer count = new Integer(10);
+		
+		int count1 = count;
+		
+		Character s ='A';
+		
+		char b =s;
+		
+		System.out.println(count1);
+		System.out.println(count);
+		
+		System.out.println(s);
+		System.out.println(b);
+		
+		String[] strAr1=new String[] {"{Jay : 4}", "{Sam:5}", "{Jay:6}"};
+		
+		Map<String, List<String>> collect = Arrays.stream(strAr1).collect(Collectors.groupingBy(c->c));
+		
+		TwoDArrayPractice.h(2,3);
+		
+		System.out.println(collect);
+		
+		System.out.println(TwoDArrayPractice.removeAlternately(9));
+		
+		Map<Character ,Integer> fmap = new HashMap();
+		
+		fmap.put('a',2);
+		fmap.put('b',2);
+		
+    for(Character c :fmap.keySet()) {
+    	if(fmap.get(c)<1) {
+    		
+    	}
+    }
+	}
+		
+	}
