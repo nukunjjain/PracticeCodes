@@ -1,0 +1,35 @@
+package testPackage;
+
+import java.util.Arrays;
+
+public class SingleElementOthersTwice {
+	
+	public static void main(String[] args) {
+		
+		int[] nums = {4,1,2,1,2};
+		
+		int maxi= 0;
+	    int singleElement=0;
+	    for(int i=0;i<nums.length;i++){
+	         maxi = Math.max(maxi,nums[i]);
+	    }
+
+	    int hash[] = new int[maxi+1];
+	    
+	    System.out.println("first hash"+Arrays.toString(hash));
+
+	    for(int j=0;j<nums.length;j++){
+	        hash[nums[j]]++;
+	    }
+	    
+	    System.out.println("Second hash"+Arrays.toString(hash));
+
+	    for (int z=0;z<hash.length;z++){
+	        if(hash[z]==1){
+	           singleElement = z;
+	        }
+	    }
+		
+	}
+
+}
