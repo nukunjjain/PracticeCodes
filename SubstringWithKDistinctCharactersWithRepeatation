@@ -1,0 +1,121 @@
+package testPackage;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class SubstringWithKDistinctCharactersWithRepeatation {
+	
+	public static void main(String[] args) {
+		String s = "aba";
+		char[] arr = s.toCharArray();
+		Character [] arr2 = new Character[5];
+	     int l = 0;
+		int r = 0;
+		int k = 1;
+		int count =0;
+		StringBuffer ls= new StringBuffer();
+//		int le = s.length();
+		HashMap<Character, Integer> map = new HashMap();
+//		while (r < le) {
+//			if (map.size() > 1) {
+//				System.out.println(arr[l]);
+//				if (map.get(l) == arr[r]) {
+//					System.out.println(arr[l] + arr[r]);
+//				}
+//				map.remove(arr[l]);
+//				l++;
+//
+//			}
+//
+//			if (map.size() == 1 || map.size()==0) {
+//				if (map.containsKey(arr[r])) {
+//					map.put(arr[r], map.get(arr[r] + 1));
+//				} else {
+//					map.put(arr[r], 1);
+//				}
+//				r++;
+//			}
+//
+//		}
+		
+		
+		// main brute force implementation
+		
+		
+//		for(int i=0;i<arr.length;i++) {
+//			   ls =new StringBuffer();
+//			   map.clear();
+//			for(int j=i;j<arr.length;j++) {
+//				if(map.size()>k) {
+//					break;
+//				}
+//				if(map.containsKey(arr[j])) {
+//				map.put(arr[j],map.get(arr[j])+1);
+//				ls.append(arr[j]);
+//					   
+//				}else {
+//					map.put(arr[j],1);
+//					ls.append(arr[j]);
+//				}
+//				if(map.size()==k) {
+//					System.out.println(ls.toString());
+//			}
+//		}
+//		
+//		
+//	}
+		//abaaca
+		while(r<arr.length) {
+	        
+        
+		
+		if(map.size()<=k) {
+			if(map.containsKey(arr[r])) {
+				map.put(arr[r],map.get(arr[r])+1);
+			}else {
+				map.put(arr[r],1);
+			}
+			
+		}
+		
+		if(map.size()>k) {
+			map.put(arr[l],map.get(arr[l])-1);
+			if(map.get(arr[l])==0) {
+				map.remove(arr[l]);
+			}
+			l++;
+		}
+		if(map.size()==k) {
+			count++;
+		}
+		if(r==(arr.length-1) && l==r){
+		    count++;
+		}
+		
+		if(map.size()<=k) {
+			r++;	
+	}
+		
+		System.out.println("number of substrings are:"+ count);
+		int []arr3 = {1,2,3,4,5};
+
+       
+}
+		
+//		String s1 = "a good    example";
+//	String [] str =	s1.split(" ");
+//	System.out.println("length :"+ str.length);
+//	Arrays.stream(str).forEach(x->System.out.println(x));
+//	
+//	String sn =new String();
+//	sn=sn.concat("Nukunj");
+//	sn=sn.concat("Jain");
+//	
+//	System.out.println("length :"+sn);
+	}
+}
+	
+	
+	
+	
+
