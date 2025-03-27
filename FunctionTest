@@ -1,0 +1,92 @@
+package testPackage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
+
+public class FunctionTest {
+	
+	public static void main(String[] args) {
+		
+		Function<Integer, Integer> function1  =x->x*x;
+		
+		Function<String,String> function3  = s-> s.substring(0,3);
+		
+		Function<String,String> function4  = s-> s.toUpperCase();
+		
+		System.out.println(function3.andThen(function4).apply("nukunj"));
+		
+		
+		
+		Predicate<Integer> pr = x-> x>10;
+		
+	//	System.out.println("Square of the given number is :"+function1.apply(2));
+		List<Employee> returnEmployees = new ArrayList<>();
+		
+		Function<List<Employee>, List<Employee>> function2  = em -> {
+			for(Employee e :em) {
+				if(pr.test(e.getId()))
+					returnEmployees.add(e);
+				
+			}
+			return returnEmployees;
+		};
+		System.out.println(function2.apply(List.of(new Employee(11,"nukunj"),new Employee(12,"nisha"),new Employee(3,"koi nhi"))));
+		
+		System.out.println("Iske baad dekho ......");
+		
+
+		Stream<Integer> smax=Stream.iterate(0,n->n+1).limit(11);
+		
+		Integer secondHighest=smax.sorted((a,b)->(b-a)).limit(2).skip(1).findAny().get();
+		
+		
+		// code for Unary and BinaryOperator
+		
+		UnaryOperator<String> u = (s)->s.toUpperCase();
+	String sr =u.apply("nukunj");
+	Consumer<String> c=(srt)->System.out.println(srt);
+	c.accept(sr);
+	
+	
+	Optional<Integer> o = Optional.ofNullable(null);
+	System.out.println(o);
+		
+		
+	}
+	
+	static class Employee{
+		
+		int id ;
+		String name;
+		public Employee(int id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", name=" + name + "]";
+		}
+		
+	}
+
+}
