@@ -1,0 +1,64 @@
+package testPackage;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FlatMapLatest {
+	
+	public static void main(String[] args) {
+		List<List<Integer>> list = List.of(List.of(1,2,3,4),List.of(5,6,7,8),List.of(9,10,11,12));
+	//	System.out.println(list);
+		
+	int [] arr = {3,1,-2,-5,2,-4};
+//	Arrays.stream(arr).boxed().collect(Collectors.toList());
+//	for(int i=0;i<arr.length;i++) {
+//		for(int j=i+1;j<arr.length;j++) {
+//			if(arr[j]==arr[i]) {
+//				break;
+//			}
+//			System.out.println(arr[j]);
+//	}
+	
+	rearrangeArray(arr);
+    
+}
+
+public static void rearrangeArray(int[] nums) {
+	int i = 0;
+	int j = 0;
+	int temp;
+	while (i < nums.length) {
+		if (nums[i] > 0) {
+			if (nums[i + 1] < 0) {
+				i = i + 2;
+			} else {
+				for (j = i + 2; j < nums.length; j++) {
+					if (nums[j] < 0) {
+						temp = nums[i + 1];
+						nums[i + 1] = nums[j];
+						nums[j] = temp;
+						break;
+					}
+				}
+			}
+		} else {
+			if (nums[i + 1] > 0) {
+				i = i + 2;
+			} else {
+				for (j = i + 2; j < nums.length; j++) {
+					if (nums[j] > 0) {
+						temp = nums[i + 1];
+						nums[i + 1] = nums[j];
+						nums[j] = temp;
+						break;
+					}
+				}
+			}
+		}
+	}
+	for(int z=0;z<nums.length;z++) {
+  System.out.println(nums[z]);
+	}
+}
+}
