@@ -1,0 +1,207 @@
+package testPackage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class StreamTest {
+	
+static class Employee{
+		
+		int id ;
+		String grade;
+		String name;
+		List<Integer> salary;
+		public Employee(int id, String grade, String name, List<Integer> salary) {
+			super();
+			this.id = id;
+			this.grade = grade;
+			this.name = name;
+			this.salary = salary;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getGrade() {
+			return grade;
+		}
+		public void setGrade(String grade) {
+			this.grade = grade;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public List<Integer> getSalary() {
+			return salary;
+		}
+		public void setSalary(List<Integer> salary) {
+			this.salary = salary;
+		}
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", grade=" + grade + ", name=" + name + ", salary=" + salary + "]";
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		 
+List<Integer> intList	=	List.of(1,2,3,4,5,6,7,8);
+
+//Stream.iterate(0, n -> n + 1)
+//.limit(10)
+//.filter(x -> x % 2 == 0)
+//.sorted((x, y) -> (x - y))
+//.map(n -> n * n).distinct()
+//.forEach(x -> System.out.println(x));
+//System.out.println("Hello");
+//
+//Stream<Integer> s=Stream.of(1,2,3,4,5);
+
+
+Stream<Integer> st=Stream.generate(()->10).limit(10);
+//
+//st.forEach(System.out::println);
+//
+//
+//BinaryOperator<Integer> b = (x,y)->x+y;
+//
+//b.apply(2,3);
+
+//Stream<Integer> st=Stream.iterate(0, n -> n + 1).limit(10);
+//
+Integer sumy =st.reduce(0,(sum,next)->sum+next);
+//Long sum1=st.mapToLong(x->x).sum();
+st.mapToLong(z->z).asDoubleStream().average();
+
+
+String ss="Nukunj";
+System.out.println(ss.startsWith("N"));
+
+List<Integer> l1 =new ArrayList<>();
+boolean c=l1.add(1);
+l1.add(1);
+l1.add(1);
+
+System.out.println(c);
+System.out.println(l1);
+
+//Set<Integer> so = new HashSet<>();
+//boolean cx=so.add(1);
+//boolean cy=so.add(1);
+//so.add(1);
+
+//System.out.println("Added :"+cx);
+//System.out.println("Not added :"+cy);
+//
+//System.out.println("Hashset :"+so);
+
+Stream<Integer> duplicateStream=Stream.of(1,1,1,2,2,2,3,3,3,4,4,4,5);
+List<Integer> duplicateList=List.of(1,1,1,2,2,2,3,3,3,4,4,4,5);
+//Set<Integer> duplicateSet = new HashSet<>();
+//
+////Set<Integer>ds=duplicateStream.filter(e->!duplicateSet.add(e)).collect(Collectors.toSet());
+//Set<Integer>ds1=duplicateStream.filter(e->Collections.frequency(duplicateList,e)>1).collect(Collectors.toSet());
+//System.out.println("duplicate elements:"+ds1);
+
+
+Stream<Integer> smax=Stream.iterate(0,n->n+1).limit(11);
+Stream<String> duplicateStream4=Stream.of("nukunj","tukunj");
+
+
+//Integer secondLowest=smax.sorted().limit(2).skip(1).findAny().get();
+//System.out.println("Second lowest element:"+secondLowest);
+
+Integer secondHighest=smax.sorted((a,b)->(b-a)).limit(2).skip(1).findAny().get();
+System.out.println("Second Highest element:"+secondHighest);
+
+
+//Integer maxw=smax.max((a,b)->(a-b)).get();
+//System.out.println("Maximum element:"+maxw);
+
+
+//Integer minw=smax.min((a,b)->(a-b)).get();
+//System.out.println("Minimum element:"+minw);
+
+
+
+
+Stream<Integer> s1=Stream.of(2,234,576,874,222);
+
+int max=s1.map(z->z).max((a,b)->(a-b)).get();
+Integer min=s1.map(z->z).min();
+//s1.map(z->z).mapToLong(z->z).average()
+
+//List<Integer> l=s1.map(n->String.valueOf(n)).filter(s->s.startsWith("2")).map(z->Integer.valueOf(z)).collect(Collectors.toList());
+System.out.println(l);
+//
+//Integer maxi=st.reduce(0,(max,b)->max>b?max:b);
+//
+//System.out.println(maxi);
+//
+Stream<String>s=Stream.of("Nukunj","Aditi","Sneha","Simran","Jigyasa","Rutuja","Akrati","Sanskriti");
+String longestWord=s.reduce((word1,word2)->word1.length()>word2.length()?word1:word2).get();
+//
+//System.out.println(longestWord);
+//
+List<Employee> employess = List.of(new Employee(0, "A", "Nukunj",List.of(100,200,3)),
+		new Employee(0, "C", "Aditi",List.of(100,200,3)),
+		new Employee(0, "A", "Sneha",List.of(100,3))
+	);
+//
+//
+//st.map(null);
+//st.flatMap(null);
+//
+employess.stream().filter(e->e.getGrade().equalsIgnoreCase("A")).flatMap(e->e.getSalary().stream()).mapToDouble(x->x).average();
+
+
+Optional<String> a=Optional.ofNullable(null);
+
+Optional<String> az=Optional.ofNullable("Nukunj");
+
+System.out.println(az);
+
+List<String> li = new ArrayList<>();
+li.add("nuykunj");
+li.add("xyz");
+li.add("zzz");
+
+
+
+Stream<Integer> ssss = Stream.of(1,2,3,4,5,6,7);
+//int sumj=ssss.reduce(0,(max,n)->max+n);
+
+//ssss.reduce((n1,n2)->n1>n2?n1:n2).get();
+
+int s2=ssss.sorted((x,y)->(y-x)).limit(2).skip(1).findAny().get();
+
+
+ssss.max
+
+//System.out.println(s2);
+
+//UnaryOperator<T>
+
+BiPre
+
+
+
+
+
+
+
+
+		
+	}
+
+}
