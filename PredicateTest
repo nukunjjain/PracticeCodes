@@ -1,0 +1,115 @@
+package testPackage;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.TreeSet;
+import java.util.function.Predicate;
+
+public class PredicateTest {
+	
+	public static void main(String[] args) {
+		
+		Predicate<Integer> checkAge = x-> x>18;
+		System.out.println("Eligible to vote :"+checkAge.test(27));
+		
+		Predicate<String> checkWordStartsWithN = x-> x.startsWith("N");
+		
+		System.out.println("Word starts with N :"+checkWordStartsWithN.test("NUKUNJ"));
+		
+Predicate<String> checkWordEndsWithJ = x-> x.endsWith("J");
+		
+	System.out.println("Word ends with J :"+checkWordEndsWithJ.test("NUKUNJ"));
+		
+	Predicate<String> c	=checkWordStartsWithN.negate();
+	
+	System.out.println("Word  :"+c.test("UKUNJ"));
+	
+	List<Integer> listInteger = new ArrayList<>();
+	
+	List<Integer> listInteger2 = new ArrayList<>();
+	
+	int [] arr = new int[]
+			{1,2,3,4,5};	
+	listInteger.add(10);
+	listInteger.add(30);
+	listInteger.add(40);
+	listInteger.add(50);
+	
+	listInteger2.add(20);
+	listInteger2.add(30);
+	listInteger2.add(40);
+	listInteger2.add(50);
+	
+	Iterator<Integer>itr = listInteger.iterator();
+	
+	if(itr.hasNext()) {
+		System.out.println("Elements presemt in iterator :"+itr.next());
+	}
+	
+	Spliterator<Integer>sp=listInteger2.spliterator();
+	
+	
+	
+	
+	Object[] azz=listInteger.toArray();
+	for(Object a : azz) {
+		int var = (int)a;
+		System.out.println("Elements in the lsit are :"+ var);
+	}
+	System.out.println("Collection equals method check"+ listInteger.equals(listInteger2));
+	;
+	TreeSet<Integer> tr  = new TreeSet<>();
+	tr.add(20);
+	tr.add(50);
+	tr.add(10);
+	tr.add(70);
+	tr.add(80);
+	tr.add(100);
+Set<Integer>thead =tr.headSet(50,true);
+Set<Integer>ttail =tr.tailSet(10,false);
+Set<Integer>tsub =tr.subSet(20, 80);
+	
+	
+	System.out.println("Collection equals method check"+ tr);
+	System.out.println("HeadSet"+ thead);
+	System.out.println("SubSet"+ tsub);
+	
+	Map<Integer,String> tv = new HashMap<>();
+	tv.put(1,"Nukunj");
+	tv.put(2,"Pranamya");
+	tv.put(3,"Rachit");
+	
+	System.out.println("Entries present in the map are :"+ tv );
+	
+	Collection<String> v =tv.values();
+	for(String o : v) {
+		
+	}
+	
+Set<Integer> sv =	tv.keySet();
+
+System.out.println("key present in the map are :"+ sv );
+
+System.out.println("EntrySet present in the map are :"+ tv.entrySet() );
+
+for(Map.Entry m : tv.entrySet()) {
+	System.out.println("key present in the map.entry are :"+ m.getKey() );
+	System.out.println("Vlue present in the map.entry are :"+ m.getValue() );
+	
+}
+
+	}
+	
+	
+	
+	
+	
+	
+
+}
