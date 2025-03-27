@@ -1,0 +1,211 @@
+package testPackage;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class StreamRevision {
+	
+	
+	static class Person{
+		
+		String id;
+		String age;
+		String name;
+		
+		
+		public Person(String id, String age, String name) {
+			super();
+			this.id = id;
+			this.age = age;
+			this.name = name;
+		}
+		
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getAge() {
+			return age;
+		}
+		public void setAge(String age) {
+			this.age = age;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+		@Override
+		public int hashCode() {
+			return Objects.hash(name);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Person other = (Person) obj;
+			return Objects.equals(name, other.name);
+		}
+
+		@Override
+		public String toString() {
+			return "Person [id=" + id + ", age=" + age + ", name=" + name + "]";
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		//Thread
+		
+	Stream<Integer>	str1=Stream.of(1,2,3,4);
+	
+	Stream<Integer> str2 =Stream.iterate(1,(x)->x).limit(10);
+	
+	Stream<Integer> str3 =Stream.generate(()->10).limit(5);
+	
+	List<String> list1=List.of("Nukunj","Happy","Vishal","Anand","JayShreePal");
+	
+	Stream<String> str4=list1.stream();
+	
+	Integer [] arr1 = new Integer[] {1,2,3,4,5,6,7};
+	
+	Stream<Integer> str5 =Arrays.stream(arr1);
+	
+	Stream<Integer>	str6=Stream.of(1,2,3,4,5,6,7,8,9);
+	
+	Stream<Integer>	str7=Stream.of(1,2,3,4,5,6,7,8,9);
+	
+	// to find sum of numbers
+	
+	System.out.println("Stream 6 :" + str6);
+	
+//	str6.sorted((a,b)->(b-a)).count()
+	
+Integer sum1=	str1.reduce(0,(x,y)->(x+y));
+
+System.out.println(sum1);
+
+Integer sum2=	str2.reduce((x,y)->(x+y)).get();
+
+System.out.println(sum2);
+
+
+
+// to find average of the numbers
+
+Double av=str5.mapToLong(x->x).average().getAsDouble();
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+//numbers.stream()..mapToInt(Integer::intValue).average().orE
+//numbers.mapToInt(Integer::intValue).average().
+System.out.println("Average of the list is"+ av);
+
+// To find maximum
+
+
+Integer maxi=str6.max((a,b)->(a-b)).get();
+
+System.out.println("Maximum element in the list is :"+ maxi);
+
+
+//To find minimum
+
+Integer mini =str7.min((a,b)->(a-b)).get();
+
+System.out.println("Minimum Element in the List is "+ mini);
+
+
+//To find Second Highest
+
+Stream<Integer>	str8=Stream.of(1,1,3,5,7,7,0,9,8);
+
+Integer seconHighest=str8.distinct().sorted((a,b)->(b-a)).limit(2).skip(1).findFirst().get();
+
+System.out.println("Second Highest Element in the List is "+ seconHighest);
+
+
+//Second Lowest
+
+Stream<Integer>	str9=Stream.of(1,1,3,5,7,7,0,9,8);
+
+Integer secondLowest=str9.distinct().sorted((a,b)->(a-b)).limit(2).skip(1).findFirst().get();
+
+System.out.println("Second Lowest Element in the List is "+ secondLowest);
+
+
+//To find the list of duplicate Elements in a List
+
+Stream<Integer>	str10=Stream.of(1,1,3,3,5,7,7,0,9,9,8);
+
+HashSet<Integer> set1 = new  HashSet<>();
+
+List<Integer>duplicateElementList=str10.filter((x)->!set1.add(x)).collect(Collectors.toList());
+
+System.out.println("Duplicate Element in the List are "+ duplicateElementList);
+
+
+
+// for groupBy 
+Person p7 = new Person("7","30","kamram");
+Person p1 = new Person("1", "26","Nukunj");
+Person p2 = new Person("2", "28","Anand");
+Person p3 = new Person("3","28","Rahul");
+Person p8 = new Person("8","30","Ghulam");
+Person p4 = new Person("4","26","Rachit");
+Person p5 = new Person("5","28","Krishna");
+Person p6 = new Person("6","26","Nukunj");
+
+
+
+List<Person> personList1 = List.of(p7,p1,p2,p8,p3,p4,p5,p6);
+
+Map<String, List<Person>> personMapList = personList1.stream().collect(Collectors.groupingBy((p) -> p.getAge()));
+
+System.out.println("GroupingBy on the basis of age (First Version of groupingBy) :"+ personMapList);
+
+
+List<Person> personList2 = List.of(p7,p1,p2,p8,p3,p4,p5,p6);
+
+Map<String,Set<Person>>personMapListOnTheBasisOfName1=personList2.stream().collect(Collectors.groupingBy((p)->p.getAge(),Collectors.toSet()));
+
+System.out.println("GroupingBy on the basis of age and printing only name by ignoring duplicate name(Second Version of groupingBy) :"+  personMapListOnTheBasisOfName1);
+
+
+List<Person> personList3 = List.of(p7,p1,p2,p8,p3,p4,p5,p6);
+
+Map<String,Set<String>>personMapListOnTheBasisOfName2=personList3.stream().collect(Collectors.groupingBy((p)->p.getAge(),Collectors.mapping(Person::getName,Collectors.toSet())));
+
+System.out.println("GroupingBy on the basis of age and printing only name without ignoring duplicate name(Second Version of groupingBy) :"+  personMapListOnTheBasisOfName2);
+
+//BinaryOperator<T>
+
+//Collectors.ma
+
+List<String> ls=List.of("Nukunj","Nukunj","Vishal");
+Map<String, Set<String>> collect = ls.stream().collect(Collectors.groupingBy(s->s,Collectors.toSet()));
+
+
+
+
+
+		
+		
+		
+	}
+
+}
