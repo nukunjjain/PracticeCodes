@@ -1,0 +1,84 @@
+package testPackage;
+
+import java.util.Arrays;
+
+public class LongestConsecutiveSequence {
+	
+	public static Boolean linearSearch(int []a, int ele) {
+		for(int i=0;i<a.length;i++) {
+			if(a[i]== ele) {
+				return true;
+			}
+	
+	}
+		return false;
+	}
+	
+	public static void longestConsecutiveSequence(int arr[]) {
+		
+		int longest= Integer.MIN_VALUE;
+		int lastElement = Integer.MIN_VALUE;
+		int count =0;
+		Arrays.sort(arr);
+		for(int i=0;i<arr.length;i++) {
+			if((arr[i]-1) == lastElement) { 
+				
+				count =count+1;
+				lastElement = arr[i];
+				
+				
+			}else if(arr[i]!=lastElement){
+				count = 1;
+				lastElement = arr[i];
+			}
+			longest	=Math.max(count,longest);
+		}
+		System.out.println(longest);
+	}
+	
+public static void longestConsecutiveSequence(int arr[]) {
+		
+		int longest= Integer.MIN_VALUE;
+		int lastElement = Integer.MIN_VALUE;
+		int count =0;
+		Arrays.sort(arr);
+		for(int i=0;i<arr.length;i++) {
+			if((arr[i]-1) == lastElement) { 
+				
+				count =count+1;
+				lastElement = arr[i];
+				
+				
+			}else if(arr[i]!=lastElement){
+				count = 1;
+				lastElement = arr[i];
+			}
+			longest	=Math.max(count,longest);
+		}
+		System.out.println(longest);
+	}
+	
+	public static void main(String[] args) {
+		int arr[] = {3,2,2,5,4,7,9,1,1,100,200};
+		int x ;
+		int count =0;
+		int longest = Integer.MIN_VALUE;
+//		for(int i=0;i<arr.length;i++) {
+//			x= arr[i];
+//			count =1;
+//			while(linearSearch(arr,x+1)) {
+//				x=x+1;
+//				count = count+1;
+//			}
+//			longest	=Math.max(count,longest);
+//			}
+//		System.out.println(longest);	
+		
+		longestConsecutiveSequence(arr);
+		
+		longestConsecutiveSequenceV2(arr);
+		}
+	
+	}
+
+
